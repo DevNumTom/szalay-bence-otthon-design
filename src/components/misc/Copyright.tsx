@@ -7,6 +7,7 @@ export default function Copyright() {
           p {
             font-size: 0.75rem;
             text-align: center;
+            color: white;
           }
         `}
       </style>

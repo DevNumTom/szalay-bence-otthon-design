@@ -1,0 +1,92 @@
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+
+export default function Contact() {
+  return (
+    <section id='kapcsolat'>
+      <img src='/images/form.svg' alt='Kapcsolat' />
+      <form>
+        <input type='text' name='name' placeholder='Teljes név' />
+        <input type='email' name='email' placeholder='E-mail' />
+        <input type='text' name='phone' placeholder='Telefon (nem kötelező)' />
+        <textarea name='message' placeholder='Üzenet...'></textarea>
+        <button className='contact100-form-btn'>
+          <span>
+            <FontAwesomeIcon
+              width={20}
+              cursor={'pointer'}
+              icon={faAddressCard}
+            />
+            Küldés
+          </span>
+        </button>
+      </form>
+      <style jsx>{`
+        #kapcsolat {
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 80%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          min-height: 500px;
+        }
+        img {
+          width: 40%;
+        }
+        form {
+          width: 40%;
+          text-align: center;
+        }
+        input,
+        textarea {
+          border-radius: 16px;
+          width: 100%;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          outline: none;
+          padding: 0 10px;
+          -webkit-box-shadow: 10px 10px 14px -9px rgba(0, 0, 0, 0.75);
+          -moz-box-shadow: 10px 10px 14px -9px rgba(0, 0, 0, 0.75);
+          box-shadow: 10px 10px 14px -9px rgba(0, 0, 0, 0.75);
+        }
+        input {
+          margin-bottom: 20px;
+          min-height: 50px;
+        }
+        textarea {
+          padding: 10px;
+          min-height: 100px;
+        }
+        button {
+          width: 200px;
+          border-radius: 16px;
+          height: 40px;
+          background: rgba(0, 0, 0, 0.9);
+          color: white;
+          font-weight: 700;
+          margin: 20px 0;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+        button:hover {
+          transform: scale(1.1);
+        }
+        @media screen and (max-width: 776px) {
+          #kapcsolat {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+          }
+          form {
+            width: 80%;
+            margin-top: 25px;
+          }
+          input {
+            width: 100%;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}

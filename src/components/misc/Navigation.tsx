@@ -10,6 +10,11 @@ export default function Navigation() {
     <>
       <Burger active={active} onClick={() => setActive(!active)} />
       <div className={'container ' + (active ? 'active' : '')}>
+        <img
+          className={'logo'}
+          src='/images/logo.png'
+          alt='Otthon Design Logo'
+        />
         <ul>
           <li>
             <Link href='/'>
@@ -37,7 +42,7 @@ export default function Navigation() {
               opacity: 0;
               width: 100%;
               height: 100vh;
-              text-align: right;
+              text-align: center;
               list-style: none;
               margin: 0;
               padding: 0;
@@ -66,22 +71,19 @@ export default function Navigation() {
             .active {
               color: #222;
             }
+            img {
+              max-width: 250px;
+              min-width: 200px;
+              width: 15vw;
+              position: absolute;
+              left: 2rem;
+              top: 2rem;
+              z-index: 10;
+            }
 
-            @media (min-width: 769px) {
-              .container {
-                width: 7rem;
-                display: block;
-              }
-              ul {
-                opacity: 1;
-                width: 7rem;
-                top: auto;
-                display: block;
-                transform: translateY(0);
-              }
-              li {
-                font-size: 1rem;
-                padding: 0;
+            @media (max-width: 460px) {
+              img {
+                min-width: 125px;
               }
             }
           `}
