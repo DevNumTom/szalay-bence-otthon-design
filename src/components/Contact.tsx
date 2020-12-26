@@ -1,4 +1,4 @@
-import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
@@ -12,14 +12,8 @@ export default function Contact() {
         <input type='text' name='phone' placeholder='Telefon (nem kötelező)' />
         <textarea name='message' placeholder='Üzenet...'></textarea>
         <button className='contact100-form-btn'>
-          <span>
-            <FontAwesomeIcon
-              width={20}
-              cursor={'pointer'}
-              icon={faAddressCard}
-            />
-            Küldés
-          </span>
+          <FontAwesomeIcon width={20} cursor={'pointer'} icon={faPaperPlane} />
+          <span>Küldés</span>
         </button>
       </form>
       <style jsx>{`
@@ -71,6 +65,9 @@ export default function Contact() {
         }
         button:hover {
           transform: scale(1.1);
+        }
+        span {
+          margin-left: 10px;
         }
         @media screen and (max-width: 776px) {
           #kapcsolat {
