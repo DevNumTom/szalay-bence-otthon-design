@@ -6,7 +6,7 @@ export default function Landing() {
       <div className='bg-overlay'></div>
       <video autoPlay muted loop>
         <source
-          src='/images/landing-video.mp4?nf_resize=fit&w=800'
+          src='/images/landing-video.mp4?nf_resize=fit&w=300'
           type='video/mp4'
         ></source>
       </video>

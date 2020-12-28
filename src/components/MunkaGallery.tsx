@@ -17,7 +17,7 @@ export default function MunkaGallery({ gallery }: Props) {
   const [photoIndex, setphotoIndex] = useState(0);
   const [isOpen, setisOpen] = useState(false);
   const IMAGES: Photo[] = gallery.map((el) => ({
-    src: el.image + `?nf_resize=fit&w=300`,
+    src: el.image + `?nf_resize=fit&w=800`,
     width: 4,
     height: 3,
   }));
