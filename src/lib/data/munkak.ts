@@ -13,3 +13,11 @@ export function getMunkak(): Munka[] {
     munkakCache = fetchContent<Munka>(munkakDirectory);
     return munkakCache;
 }
+
+export function getMunkaWithPrevAndNextSlug(slug: string): [Munka, string, string] {
+    const munkak = getMunkak();
+    const index = munkak.findIndex(munka => munka.slug === slug);
+    const prevSlug = munkak[index === 0 ? munkak.length - 1 : index - 1].slug;
+    const nextSlug = munkak[index === munkak.length - 1 ? 0 : index + 1].slug;
+    return [munkak[index], prevSlug, nextSlug];
+}

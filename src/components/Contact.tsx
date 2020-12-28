@@ -1,11 +1,14 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import CustomImage from './CustomImage';
 
 export default function Contact() {
   return (
     <section id='kapcsolat'>
-      <img src='/images/form.svg' alt='Kapcsolat' />
+      <div className='custom-img'>
+        <CustomImage src='/images/form.svg' alt='Kapcsolat' />
+      </div>
       <form>
         <input type='text' name='name' placeholder='Teljes név' />
         <input type='email' name='email' placeholder='E-mail' />
@@ -26,7 +29,7 @@ export default function Contact() {
           align-items: center;
           min-height: 500px;
         }
-        img {
+        .custom-img {
           width: 40%;
         }
         form {

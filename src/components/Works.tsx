@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
 import { Munka } from '../lib/models';
+import CustomImage from './CustomImage';
 
 type Props = {
   munkak: Munka[];
