@@ -5,7 +5,10 @@ export default function Landing() {
     <section id='landing'>
       <div className='bg-overlay'></div>
       <video autoPlay muted loop>
-        <source src='/images/landing-video.mp4' type='video/mp4'></source>
+        <source
+          src='/images/landing-video.mp4?nf_resize=fit&w=800'
+          type='video/mp4'
+        ></source>
       </video>
       <div className='viewport-header'>
         <h1>
