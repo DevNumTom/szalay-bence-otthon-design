@@ -39,7 +39,8 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
       <style jsx>
         {`
           .container {
-            margin: 0 auto;
+            min-height: calc(90vh - 550px);
+            margin: 50px auto;
             max-width: 1200px;
             width: 100%;
             padding: 0 1.5rem;

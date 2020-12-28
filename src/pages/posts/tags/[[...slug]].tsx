@@ -22,7 +22,7 @@ export default function Index({ posts, tag, pagination, page }: Props) {
   const url = `/posts/tags/${tag.name}` + (page ? `/${page}` : '');
   const title = tag.name;
   return (
-    <Layout>
+    <Layout darkImage='/images/blog.jpg'>
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />

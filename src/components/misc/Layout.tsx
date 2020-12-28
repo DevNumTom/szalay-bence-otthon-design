@@ -16,20 +16,8 @@ export default function Layout({ children, darkImage = '' }: Props) {
         <link rel='apple-touch-icon' href='/icon.png' />
         <meta name='theme-color' content='#fff' />
       </Head>
-      <nav
-        className={darkImage ? 'dark-nav' : ''}
-        style={
-          darkImage
-            ? {
-                background: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-        url('${darkImage}');`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }
-            : {}
-        }
-      >
-        <Navigation />
+      <nav className={darkImage ? 'dark-nav' : ''}>
+        <Navigation isWhiteLogo={!!darkImage} />
       </nav>
       <main>{children}</main>
       <footer>
@@ -44,6 +32,9 @@ export default function Layout({ children, darkImage = '' }: Props) {
             height: 100%;
             width: 100%;
           }
+          main {
+            min-height: calc(100vh - 462px);
+          }
           footer {
             background: black;
             height: 200px;
@@ -53,6 +44,13 @@ export default function Layout({ children, darkImage = '' }: Props) {
             width: 100%;
             height: 350px;
             color: white;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.85),
+                rgba(0, 0, 0, 0.85)
+              ),
+              url('${darkImage}');
+            background-size: cover;
+            background-position: center;
           }
         `}
       </style>

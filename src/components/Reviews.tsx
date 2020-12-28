@@ -26,11 +26,10 @@ export default function Reviews({ reviews }: Props) {
         #reviews {
           margin-top: 85px;
           background: linear-gradient(
-              270deg,
-              rgba(0, 0, 0, 0.9) 0%,
-              rgba(0, 0, 0, 1) 100%
-            ),
-            url('/images/rating.jpg');
+            270deg,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 1) 100%
+          );
           background-size: cover;
           background-position: center;
 

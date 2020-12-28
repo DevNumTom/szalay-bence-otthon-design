@@ -31,7 +31,7 @@ export default function Index({ szolgaltatasok, reviews, munkak }: Props) {
       <Title title='Szolgáltatások' />
       <Services szolgaltatasok={szolgaltatasok} />
       <Reviews reviews={reviews} />
-      <Title title='Referenciák' />
+      <Title title='Munkáim' />
       <Works munkak={munkak} />
       <Title title='Kapcsolat' />
       <Contact />

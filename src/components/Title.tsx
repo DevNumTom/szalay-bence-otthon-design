@@ -16,6 +16,11 @@ export default function Title({ title }: Props) {
             font-size: 40px;
             letter-spacing: 3px;
           }
+          @media screen and (max-width: 400px) {
+            h1 {
+              font-size: 30px;
+            }
+          }
         `}
       </style>
     </h1>

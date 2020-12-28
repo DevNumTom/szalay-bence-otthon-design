@@ -2,7 +2,6 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import CustomImage from './CustomImage';
-
 export default function Contact() {
   return (
     <section id='kapcsolat'>

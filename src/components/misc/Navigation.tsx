@@ -3,22 +3,54 @@ import { useRouter } from 'next/router';
 import Burger from './Burger';
 import { useState } from 'react';
 
-export default function Navigation() {
+type Props = {
+  isWhiteLogo?: boolean;
+};
+
+export default function Navigation({ isWhiteLogo = false }: Props) {
   const router = useRouter();
   const [active, setActive] = useState(false);
   return (
     <>
       <Burger active={active} onClick={() => setActive(!active)} />
       <div className={'container ' + (active ? 'active' : '')}>
-        <img
-          className={'logo'}
-          src='/images/logo.png'
-          alt='Otthon Design Logo'
-        />
+        <Link href='/'>
+          <a>
+            <img
+              className={'logo'}
+              src={isWhiteLogo ? '/images/logo_white.png' : '/images/logo.png'}
+              alt='Otthon Design Logo'
+            />
+          </a>
+        </Link>
         <ul>
           <li>
             <Link href='/'>
-              <a className={router.pathname === '/' ? 'active' : null}>about</a>
+              <a className={router.pathname === '/' ? 'active' : null}>
+                Főoldal
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/munkak'>
+              <a
+                className={
+                  router.pathname.startsWith('/munkak') ? 'active' : null
+                }
+              >
+                Munkáim
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/rolam'>
+              <a
+                className={
+                  router.pathname.startsWith('/rolam') ? 'active' : null
+                }
+              >
+                Rólam
+              </a>
             </Link>
           </li>
           <li>
@@ -28,7 +60,18 @@ export default function Navigation() {
                   router.pathname.startsWith('/posts') ? 'active' : null
                 }
               >
-                blog
+                Blog
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/kapcsolat'>
+              <a
+                className={
+                  router.pathname.startsWith('/kapcsolat') ? 'active' : null
+                }
+              >
+                Kapcsolat
               </a>
             </Link>
           </li>
@@ -52,7 +95,7 @@ export default function Navigation() {
               display: flex;
               flex-direction: column;
               justify-content: center;
-              z-index: 1;
+              z-index: 11;
               transform: translateY(100%);
               transition: opacity 200ms;
             }

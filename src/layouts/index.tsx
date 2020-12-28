@@ -34,7 +34,7 @@ export default function Index({
   const authorName = getAuthor(author).name;
   return ({ children: content }) => {
     return (
-      <Layout>
+      <Layout darkImage='/images/blog_post.jpg'>
         <BasicMeta
           url={`/posts/${slug}`}
           title={title}
@@ -91,10 +91,11 @@ export default function Index({
         <style jsx>
           {`
             .container {
+              min-height: calc(90vh - 550px);
               display: block;
               max-width: 36rem;
               width: 100%;
-              margin: 0 auto;
+              margin: 50px auto;
               padding: 0 1.5rem;
               box-sizing: border-box;
             }
