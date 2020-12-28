@@ -22,6 +22,9 @@ export default function Burger({ active, onClick }: Props) {
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 50px;
             padding: 5px;
+            -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
           }
           .meat {
             position: absolute;

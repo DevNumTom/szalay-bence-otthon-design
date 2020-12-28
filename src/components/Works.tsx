@@ -2,7 +2,6 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
 import { Munka } from '../lib/models';
-import CustomImage from './CustomImage';
 
 type Props = {
   munkak: Munka[];
@@ -15,7 +14,7 @@ export default function Works({ munkak }: Props) {
         <Carousel showArrows={true}>
           {munkak.map((el, i) => (
             <div key={el.cover}>
-              <img src={el.cover} alt={el.name} />
+              <img src={`${el.cover}?nf_resize=fit&w=1920`} alt={el.name} />
               <p className='legend legend-font'>
                 <Link href={`/munkak/${el.slug}`}>
                   <a>{el.name}</a>

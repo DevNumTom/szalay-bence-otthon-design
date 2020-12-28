@@ -48,7 +48,7 @@ export default function Layout({ children, darkImage = '' }: Props) {
                 rgba(0, 0, 0, 0.85),
                 rgba(0, 0, 0, 0.85)
               ),
-              url('${darkImage}');
+              url('${darkImage}?nf_resize=fit&w=1920');
             background-size: cover;
             background-position: center;
           }
