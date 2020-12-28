@@ -1,11 +1,11 @@
 export default function Copyright() {
   return (
     <>
-      <p>&copy; 2020</p>
+      <p>&copy; 2020 - DevNumTom</p>
       <style jsx>
         {`
           p {
-            font-size: 0.75rem;
+            font-size: 1.2rem;
             text-align: center;
             color: white;
           }

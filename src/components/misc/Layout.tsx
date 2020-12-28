@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Copyright from './Copyright';
 import Navigation from './Navigation';
+import Footer from './Footer';
 
 type Props = {
   children: React.ReactNode;
@@ -20,9 +20,7 @@ export default function Layout({ children, darkImage = '' }: Props) {
         <Navigation isWhiteLogo={!!darkImage} />
       </nav>
       <main>{children}</main>
-      <footer>
-        <Copyright />
-      </footer>
+      <Footer />
       <style jsx>
         {`
           .root {
@@ -35,10 +33,6 @@ export default function Layout({ children, darkImage = '' }: Props) {
           main {
             min-height: calc(100vh - 462px);
           }
-          footer {
-            background: black;
-            height: 200px;
-          }
           .dark-nav {
             display: table;
             width: 100%;
@@ -48,7 +42,7 @@ export default function Layout({ children, darkImage = '' }: Props) {
                 rgba(0, 0, 0, 0.85),
                 rgba(0, 0, 0, 0.85)
               ),
-              url('${darkImage}?nf_resize=fit&w=1920');
+              url('${darkImage}?nf_resize=smartcrop&w=1920&h=400');
             background-size: cover;
             background-position: center;
           }

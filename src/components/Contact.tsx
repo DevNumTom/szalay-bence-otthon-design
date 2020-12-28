@@ -8,12 +8,12 @@ export default function Contact() {
       <div className='custom-img'>
         <CustomImage src='/images/form.svg' alt='Kapcsolat' />
       </div>
-      <form>
+      <form name='contact' method='POST' data-netlify='true'>
         <input type='text' name='name' placeholder='Teljes név' />
         <input type='email' name='email' placeholder='E-mail' />
         <input type='text' name='phone' placeholder='Telefon (nem kötelező)' />
         <textarea name='message' placeholder='Üzenet...'></textarea>
-        <button className='contact100-form-btn'>
+        <button type='submit'>
           <FontAwesomeIcon width={20} cursor={'pointer'} icon={faPaperPlane} />
           <span>Küldés</span>
         </button>
