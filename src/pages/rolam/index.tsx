@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import React from 'react';
 import CustomImage from '../../components/CustomImage';
 import BasicMeta from '../../components/meta/BasicMeta';
@@ -5,34 +6,28 @@ import OpenGraphMeta from '../../components/meta/OpenGraphMeta';
 import TwitterCardMeta from '../../components/meta/TwitterCardMeta';
 import Layout from '../../components/misc/Layout';
 import Title from '../../components/Title';
+import { getAdataim } from '../../lib/data/adataim';
+import { Adataim } from '../../lib/models';
 
-export default function Index() {
+type Props = {
+  adataim: Adataim;
+};
+
+export default function Index({ adataim }: Props) {
   const url = `/rolam`;
   const title = 'Rólam';
   return (
-    <Layout darkImage='images/rolam.jpg'>
+    <Layout darkImage='/images/rolam.jpg'>
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
-      <div className='card  '>
+      <div className='card'>
         <div className='img-container'>
           <CustomImage src='images/profilkep_1.jpg' alt='Proifilkép' />
         </div>
         <div className='rolam-container'>
           <Title title='Rólam' />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            quia provident eos nesciunt aliquid fugit, dolor veniam optio quasi
-            aut ut et corporis adipisci voluptatum laboriosam natus sit
-            repudiandae asperiores? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Recusandae quia provident eos nesciunt aliquid
-            fugit, dolor veniam optio quasi aut ut et corporis adipisci
-            voluptatum laboriosam natus sit repudiandae asperiores? Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Recusandae quia
-            provident eos nesciunt aliquid fugit, dolor veniam optio quasi aut
-            ut et corporis adipisci voluptatum laboriosam natus sit repudiandae
-            asperiores?
-          </p>
+          <p>{adataim.rolam}</p>
         </div>
       </div>
       <div className='card secondary-card'></div>
@@ -76,3 +71,12 @@ export default function Index() {
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const adataim = getAdataim();
+  return {
+    props: {
+      szolgaltatasok: adataim,
+    },
+  };
+};

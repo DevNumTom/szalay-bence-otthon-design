@@ -16,7 +16,7 @@ export default function Munkak({ munkak }: Props) {
   const url = `/munkak`;
   const title = 'Munkák';
   return (
-    <Layout darkImage='images/works.jpg'>
+    <Layout darkImage='/images/works.jpg'>
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />

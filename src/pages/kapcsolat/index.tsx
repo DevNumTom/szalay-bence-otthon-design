@@ -19,7 +19,7 @@ export default function Index({ adataim }: Props) {
   const url = `/kapcsolat`;
   const title = 'Kapcsolat';
   return (
-    <Layout darkImage='images/kapcsolat_2.jpg'>
+    <Layout darkImage='/images/kapcsolat_2.jpg'>
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />

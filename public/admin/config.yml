@@ -225,4 +225,7 @@ collections:
         widget: 'string'
       - label: 'Facebook'
         name: 'facebook'
+        widget: 'string'
+      - label: 'Rólam'
+        name: 'rolam'
         widget: 'markdown'

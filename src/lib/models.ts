@@ -25,4 +25,5 @@ export type Adataim = {
     readonly phone: string;
     readonly email: string;
     readonly facebook: string;
+    readonly rolam: string;
 };
