@@ -1,5 +1,6 @@
-import { faAt, faPhone, faVoicemail } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { GetStaticProps } from 'next';
 import React from 'react';
 import Contact from '../../components/Contact';
 import BasicMeta from '../../components/meta/BasicMeta';
@@ -7,12 +8,18 @@ import OpenGraphMeta from '../../components/meta/OpenGraphMeta';
 import TwitterCardMeta from '../../components/meta/TwitterCardMeta';
 import Layout from '../../components/misc/Layout';
 import Title from '../../components/Title';
+import { getAdataim } from '../../lib/data/adataim';
+import { Adataim } from '../../lib/models';
 
-export default function Index() {
+type Props = {
+  adataim: Adataim;
+};
+
+export default function Index({ adataim }: Props) {
   const url = `/kapcsolat`;
   const title = 'Kapcsolat';
   return (
-    <Layout darkImage='images/kapcsolat.jpg'>
+    <Layout darkImage='images/kapcsolat_2.jpg'>
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
@@ -22,11 +29,11 @@ export default function Index() {
       <div className='cards-container'>
         <div className='card'>
           <FontAwesomeIcon width={50} icon={faPhone} />
-          <h2>+36 (30) 123 4567</h2>
+          <h2>{adataim.phone}</h2>
         </div>
         <div className='card'>
           <FontAwesomeIcon width={50} icon={faAt} />
-          <h2>szalaybence@gmail.com</h2>
+          <h2>{adataim.email}</h2>
         </div>
       </div>
       <style jsx>{`
@@ -79,3 +86,12 @@ export default function Index() {
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const adataim = getAdataim();
+  return {
+    props: {
+      adataim: adataim,
+    },
+  };
+};

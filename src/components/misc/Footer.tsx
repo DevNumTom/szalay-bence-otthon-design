@@ -4,7 +4,6 @@ import CustomImage from '../CustomImage';
 import Copyright from './Copyright';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressBook } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
   const router = useRouter();
@@ -22,14 +21,16 @@ export default function Footer() {
           <li>
             <Link href=''>
               <a>
-                <FontAwesomeIcon icon={'facebook'} color='#fff' />
+                {/* TODO */}
+                {/* <FontAwesomeIcon icon={'facebook'} color='#fff' /> */}
               </a>
             </Link>
           </li>
           <li>
             <Link href=''>
               <a>
-                <FontAwesomeIcon icon={'instagram'} color='#fff' />
+                {/* TODO */}
+                {/* <FontAwesomeIcon icon={'instagram'} color='#fff' /> */}
               </a>
             </Link>
           </li>
@@ -87,15 +88,17 @@ export default function Footer() {
         footer {
           align-items: center;
           background: black;
-          height: 300px;
+          min-height: 300px;
           display: flex;
           justify-content: space-around;
+          padding: 20px;
         }
         .image-container {
           width: 200px;
         }
         ul {
           list-style: none;
+          padding: 0;
         }
         li {
           padding: 5px 0;
@@ -106,6 +109,11 @@ export default function Footer() {
         }
         a:hover {
           color: rgba(255, 255, 255, 0.5);
+        }
+        @media screen and (max-width: 500px) {
+          footer {
+            flex-direction: column;
+          }
         }
       `}</style>
     </footer>
