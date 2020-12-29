@@ -27,7 +27,7 @@ export default function Index({ adataim }: Props) {
         </div>
         <div className='rolam-container'>
           <Title title='Rólam' />
-          <p>{adataim.rolam}</p>
+          <p>{adataim ? adataim.rolam : ''}</p>
         </div>
       </div>
       <div className='card secondary-card'></div>
