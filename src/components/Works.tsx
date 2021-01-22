@@ -2,16 +2,21 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
 import { Munka } from '../lib/models';
+import { useRouter } from 'next/router';
 
 type Props = {
   munkak: Munka[];
 };
 
 export default function Works({ munkak }: Props) {
+  const router = useRouter();
   return (
     <div className='card'>
       <div className='carousel-container'>
-        <Carousel showArrows={true}>
+        <Carousel
+          onClickItem={(i) => router.push(`/munkak/${munkak[i].slug}`)}
+          showArrows={true}
+        >
           {munkak.map((el, i) => (
             <div key={el.cover}>
               <img src={`${el.cover}?nf_resize=fit&w=1920`} alt={el.name} />

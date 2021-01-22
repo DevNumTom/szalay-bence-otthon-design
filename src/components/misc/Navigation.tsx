@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Burger from './Burger';
 import { useState } from 'react';
+import { useWindowSize } from '../Landing';
+import Navbar from '../Navbar';
 
 type Props = {
   isWhiteLogo?: boolean;
@@ -10,9 +12,17 @@ type Props = {
 export default function Navigation({ isWhiteLogo = false }: Props) {
   const router = useRouter();
   const [active, setActive] = useState(false);
+  const size = useWindowSize();
   return (
     <>
-      <Burger active={active} onClick={() => setActive(!active)} />
+      {
+        size.width < 766 ? (
+          <Burger active={active} onClick={() => setActive(!active)} />
+        ) : null
+        // <div className='navbar'>
+        //   <Navbar />
+        // </div>
+      }
       <div className={'container ' + (active ? 'active' : '')}>
         <Link href='/'>
           <a>
@@ -80,6 +90,14 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
           {`
             .container {
               width: 0;
+            }
+            .navbar {
+              position: absolute;
+              right: 50px;
+              top: 50px;
+               {
+                /* z-index: 5; */
+              }
             }
             ul {
               opacity: 0;

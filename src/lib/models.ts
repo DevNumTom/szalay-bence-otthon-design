@@ -1,6 +1,7 @@
 export type Szolgaltatas = {
     readonly title: string;
     readonly thumbnail: string;
+    readonly desc: string;
 };
 
 export type Review = {
@@ -22,8 +23,9 @@ export type Munka = {
 };
 
 export type Adataim = {
-    readonly phone: string;
+    readonly telefon: string;
     readonly email: string;
     readonly facebook: string;
+    readonly shortDesc: string;
     readonly rolam: string;
 };

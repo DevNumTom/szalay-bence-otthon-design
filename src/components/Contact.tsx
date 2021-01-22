@@ -6,7 +6,11 @@ export default function Contact() {
   return (
     <section id='kapcsolat'>
       <div className='custom-img'>
-        <CustomImage src='/images/form.svg' alt='Kapcsolat' />
+        <CustomImage
+          radius={50}
+          src='/images/profilkep_2.jpg'
+          alt='Kapcsolat'
+        />
       </div>
       <form
         name='contact'
@@ -27,7 +31,7 @@ export default function Contact() {
       <style jsx>{`
         #kapcsolat {
           max-width: 1200px;
-          margin: 0 auto;
+          margin: 0 auto 50px;
           width: 80%;
           display: flex;
           justify-content: space-around;

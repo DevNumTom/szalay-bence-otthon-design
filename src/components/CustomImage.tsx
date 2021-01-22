@@ -6,6 +6,7 @@ type Props = {
   resize?: 'fit' | 'smartcrop';
   width?: number;
   height?: number;
+  radius?: number;
 };
 
 export default function CustomImage({
@@ -14,6 +15,7 @@ export default function CustomImage({
   resize = 'fit',
   width,
   height,
+  radius = 0,
 }: Props) {
   const transformSrc = (): string => {
     if (!width && !height) {
@@ -28,5 +30,11 @@ export default function CustomImage({
     }
     return srcWithQueries;
   };
-  return <img src={transformSrc()} alt={alt} style={{ width: '100%' }} />;
+  return (
+    <img
+      src={transformSrc()}
+      alt={alt}
+      style={{ width: '100%', borderRadius: radius }}
+    />
+  );
 }

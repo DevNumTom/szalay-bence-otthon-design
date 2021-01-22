@@ -1,15 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
+
+// Hook
+export function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== 'undefined') {
+      // Handler to call on window resize
+      const handleResize = () => {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
+      // Add event listener
+      window.addEventListener('resize', handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+}
 
 export default function Landing() {
+  const size = useWindowSize();
   return (
     <section id='landing'>
+      <div className='navbar'>
+        <Navbar isDarkBackground={false} />
+      </div>
       <div className='bg-overlay'></div>
-      <video autoPlay muted loop>
-        <source
-          src='/images/landing-video.mp4?nf_resize=fit&w=300'
-          type='video/mp4'
-        ></source>
-      </video>
+      {size.width > 766 ? (
+        <video className='bg-media' autoPlay muted loop>
+          <source
+            src='/images/landing-video.mp4?nf_resize=fit&w=300'
+            type='video/mp4'
+          ></source>
+        </video>
+      ) : (
+        <div className='bg-image'></div>
+      )}
       <div className='viewport-header'>
         <h1>
           Szalay Bence
@@ -17,6 +60,9 @@ export default function Landing() {
         </h1>
       </div>
       <style jsx>{`
+        #landing {
+          position: relative;
+        }
         video {
           object-fit: cover;
           width: 100%;
@@ -25,6 +71,20 @@ export default function Landing() {
           top: 0;
           left: 0;
           filter: blur(5px);
+        }
+        .bg-image {
+          background-image: url('/images/bg_mobile.jpg');
+          background-position: center;
+          background-size: cover;
+          width: 100vw;
+          height: 100vh;
+          filter: blur(5px);
+        }
+        .navbar {
+          position: absolute;
+          right: 50px;
+          top: 100px;
+          z-index: 5;
         }
         .viewport-header {
           position: absolute;
@@ -62,6 +122,11 @@ export default function Landing() {
           background: #ffffff;
           background: linear-gradient(180deg, white 0%, transparent 50%);
           opacity: 0.8;
+        }
+        @media screen and (min-width: 776) {
+          video {
+            display: block;
+          }
         }
         @media screen and (min-width: 1200px) {
           h1 {

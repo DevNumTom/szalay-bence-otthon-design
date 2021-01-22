@@ -13,3 +13,8 @@ export function getSzolgaltatasok(): Szolgaltatas[] {
     szolgaltatasokCache = fetchContent<Szolgaltatas>(szolgaltatasokDirectory);
     return szolgaltatasokCache;
 }
+
+export function getSzolgaltatas(index: number): Szolgaltatas {
+    const szolgaltatasok = getSzolgaltatasok();
+    return szolgaltatasok[index - 1];
+}

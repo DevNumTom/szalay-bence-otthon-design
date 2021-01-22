@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Szolgaltatas } from '../lib/models';
 
@@ -6,6 +7,7 @@ type Props = {
 };
 
 export default function Services({ szolgaltatasok }: Props) {
+  const router = useRouter();
   return (
     <section id='szolgaltatasok'>
       {szolgaltatasok.map((el, i) => (
@@ -13,6 +15,7 @@ export default function Services({ szolgaltatasok }: Props) {
           key={i}
           className='card'
           style={{ backgroundImage: `url(${el.thumbnail})` }}
+          onClick={() => router.push(`/szolgaltatasok/${i + 1}`)}
         >
           <div className='title-container'>
             <h2>{el.title}</h2>
@@ -36,6 +39,7 @@ export default function Services({ szolgaltatasok }: Props) {
           transition: all 0.2s ease-in-out;
           background-position: center;
           background-size: cover;
+          cursor: pointer;
         }
         .card:hover {
           transform: scale(1.1);
