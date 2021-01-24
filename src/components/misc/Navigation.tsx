@@ -2,8 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Burger from './Burger';
 import { useState } from 'react';
-import { useWindowSize } from '../Landing';
-import Navbar from '../Navbar';
+import { useWindowSize } from '../../hooks/window-size';
 
 type Props = {
   isWhiteLogo?: boolean;
@@ -15,14 +14,9 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
   const size = useWindowSize();
   return (
     <>
-      {
-        size.width < 766 ? (
-          <Burger active={active} onClick={() => setActive(!active)} />
-        ) : null
-        // <div className='navbar'>
-        //   <Navbar />
-        // </div>
-      }
+      {size.width < 1024 ? (
+        <Burger active={active} onClick={() => setActive(!active)} />
+      ) : null}
       <div className={'container ' + (active ? 'active' : '')}>
         <Link href='/'>
           <a>

@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
+import { useWindowSize } from '../../hooks/window-size';
 
 type Props = {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ type Props = {
 };
 export default function Layout({ children, darkImage = '' }: Props) {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const size = useWindowSize();
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
@@ -34,10 +36,12 @@ export default function Layout({ children, darkImage = '' }: Props) {
       <nav className={darkImage ? 'dark-nav' : ''}>
         <Navigation isWhiteLogo={!!darkImage} />
       </nav>
-      <div className='navbar'>
-        <Navbar isDarkBackground={true} />
-      </div>
-      {scrollPosition > 110 && (
+      {size.width > 1024 && (
+        <div className='navbar'>
+          <Navbar isDarkBackground={true} />
+        </div>
+      )}
+      {scrollPosition > 110 && size.width > 1024 && (
         <header>
           <div className='navbar-container'>
             <Navbar isDarkBackground={true} />
@@ -71,12 +75,8 @@ export default function Layout({ children, darkImage = '' }: Props) {
             justify-content: flex-end;
             z-index: 11;
             all: 0.5s ease;
-             {
-              /* box-shadow: 0 4px 2px -2px gray; */
-            }
           }
           .navbar-container {
-            width: 500px;
             display: flex;
             align-items: center;
             margin-right: 50px;

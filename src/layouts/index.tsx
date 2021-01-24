@@ -1,9 +1,6 @@
-import Head from 'next/head';
 import React from 'react';
 import styles from '../../public/styles/content.module.css';
-import Author from '../components/posts/Author';
 import Copyright from '../components/misc/Copyright';
-import Date from '../components/misc/Date';
 import Layout from '../components/misc/Layout';
 import BasicMeta from '../components/meta/BasicMeta';
 import JsonLdMeta from '../components/meta/JsonLdMeta';
@@ -61,17 +58,6 @@ export default function Index({
         />
         <div className={'container'}>
           <article>
-            <header>
-              <h1>{title}</h1>
-              <div className={'metadata'}>
-                <div>
-                  <Date date={date} />
-                </div>
-                <div>
-                  <Author author={getAuthor(author)} />
-                </div>
-              </div>
-            </header>
             <div className={styles.content}>{content}</div>
             <ul className={'tag-list'}>
               {tags.map((it, i) => (

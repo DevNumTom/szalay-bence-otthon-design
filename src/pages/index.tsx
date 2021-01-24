@@ -16,6 +16,7 @@ import { getReviews } from '../lib/data/reviews';
 import { getMunkak } from '../lib/data/munkak';
 import { getAdataim } from '../lib/data/adataim';
 import ContactInfos from '../components/ContactInfos';
+import Calculator from '../components/Calculator';
 
 type Props = {
   szolgaltatasok: Szolgaltatas[];
@@ -46,6 +47,8 @@ export default function Index({
       <Contact />
       <Title title='Elérhetőségek' />
       <ContactInfos adataim={adataim} />
+      <Title title='Árkalkulátor' />
+      <Calculator munkadijSzorzo={+adataim.munkadijSzorzo} />
       <style jsx>{`
         .short-desc {
           max-width: 750px;

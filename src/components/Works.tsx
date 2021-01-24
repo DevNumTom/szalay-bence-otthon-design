@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
-import { Munka } from '../lib/models';
+import { Munka, MunkaType } from '../lib/models';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -22,7 +22,7 @@ export default function Works({ munkak }: Props) {
               <img src={`${el.cover}?nf_resize=fit&w=1920`} alt={el.name} />
               <p className='legend legend-font'>
                 <Link href={`/munkak/${el.slug}`}>
-                  <a>{el.name}</a>
+                  <a>{`${el.name} - ${el.type}`}</a>
                 </Link>
               </p>
             </div>
@@ -41,6 +41,7 @@ export default function Works({ munkak }: Props) {
         }
         .carousel-container {
           padding: 20px;
+          cursor: pointer;
         }
         .legend-font.legend-font.legend-font {
           font-size: 2vw;

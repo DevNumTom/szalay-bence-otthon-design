@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const adataim = getAdataim();
   return {
     props: {
-      szolgaltatasok: adataim,
+      adataim: adataim,
     },
   };
 };

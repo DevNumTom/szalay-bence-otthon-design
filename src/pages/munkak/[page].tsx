@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import BasicMeta from '../../components/meta/BasicMeta';
 import OpenGraphMeta from '../../components/meta/OpenGraphMeta';
 import TwitterCardMeta from '../../components/meta/TwitterCardMeta';
@@ -7,7 +7,7 @@ import Title from '../../components/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { Munka } from '../../lib/models';
+import { GalleryItem, Munka, MunkaType } from '../../lib/models';
 import Layout from '../../components/misc/Layout';
 import MunkaGallery from '../../components/MunkaGallery';
 import { getMunkak, getMunkaWithPrevAndNextSlug } from '../../lib/data/munkak';
@@ -19,8 +19,12 @@ type Props = {
 };
 
 export default function Page({ munka, nextSlug, prevSlug }: Props) {
+  const [isBeforeShown, setIsBeforeShown] = useState(false);
   const url = `/munkak/${munka ? munka.slug : ''}`;
   const title = munka ? munka.name : '';
+  const getCurrentGallery = (): GalleryItem[] => {
+    return isBeforeShown ? munka.before_gallery : munka.gallery;
+  };
   return (
     <Layout darkImage={munka ? munka.cover : ''}>
       <BasicMeta url={url} title={title} />
@@ -43,13 +47,46 @@ export default function Page({ munka, nextSlug, prevSlug }: Props) {
           </a>
         </Link>
       </div>
-      <MunkaGallery gallery={munka ? munka.gallery : []} />
+      {munka && munka.type === MunkaType.Felujitas && (
+        <div className='tabs'>
+          <p
+            onClick={() => setIsBeforeShown(true)}
+            className={`tab ${isBeforeShown ? 'active' : null}`}
+          >
+            Felújítás előtt
+          </p>
+          <p
+            onClick={() => setIsBeforeShown(false)}
+            className={`tab ${!isBeforeShown ? 'active' : null}`}
+          >
+            Felújítás után
+          </p>
+        </div>
+      )}
+      <MunkaGallery gallery={munka ? getCurrentGallery() : []} />
       <style jsx>{`
         .title-container {
           display: flex;
           justify-content: space-around;
           align-items: center;
           margin: 0 10px;
+        }
+        .tabs {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        }
+        .tab {
+          color: rgba(0, 0, 0, 0.8);
+          font-size: 24px;
+          cursor: pointer;
+        }
+        .tab:hover {
+          color: rgba(0, 0, 0, 1);
+        }
+        .active {
+          color: rgba(0, 0, 0, 0.6);
+          text-decoration: underline;
         }
       `}</style>
     </Layout>

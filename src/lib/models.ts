@@ -18,14 +18,22 @@ export type Munka = {
     readonly name: string;
     readonly cover: string;
     readonly slug: string;
+    readonly type: MunkaType;
     readonly gallery: GalleryItem[];
     readonly before_gallery: GalleryItem[];
 };
+
+export enum MunkaType {
+    Airbnb = 'Airbnb',
+    Felujitas = 'Felújítás',
+    Lakberendezes = 'Lakberendezés'
+}
 
 export type Adataim = {
     readonly telefon: string;
     readonly email: string;
     readonly facebook: string;
     readonly shortDesc: string;
+    readonly munkadijSzorzo: string;
     readonly rolam: string;
 };

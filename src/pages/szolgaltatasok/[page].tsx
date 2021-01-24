@@ -18,18 +18,31 @@ type Props = {
 };
 
 export default function Asd({ szolgaltatas, url }: Props) {
+  const szolgaltatasUrl = 'szolgaltatas';
+  const getValueByKey = (key: string): any => {
+    return szolgaltatas ? szolgaltatas[key] : null;
+  };
   return (
     <Layout darkImage='images/services.jpg'>
-      <BasicMeta url={url} title={szolgaltatas.title} />
-      <OpenGraphMeta url={url} title={szolgaltatas.title} />
-      <TwitterCardMeta url={url} title={szolgaltatas.title} />
+      <BasicMeta url={url || szolgaltatasUrl} title={getValueByKey('title')} />
+      <OpenGraphMeta
+        url={url || szolgaltatasUrl}
+        title={getValueByKey('title')}
+      />
+      <TwitterCardMeta
+        url={url || szolgaltatasUrl}
+        title={getValueByKey('title')}
+      />
       <div className='card'>
         <div className='img-container'>
-          <CustomImage src={szolgaltatas.thumbnail} alt={szolgaltatas.title} />
+          <CustomImage
+            src={getValueByKey('thumbnail')}
+            alt={getValueByKey('title')}
+          />
         </div>
         <div className='rolam-container'>
-          <Title title={szolgaltatas.title} />
-          <p>{szolgaltatas.desc}</p>
+          <Title title={getValueByKey('title')} />
+          <p>{getValueByKey('desc')}</p>
         </div>
       </div>
       <div className='card secondary-card'></div>
@@ -78,8 +91,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const szolgaltatas = getSzolgaltatas(+(params as { page: string }).page);
   return {
     props: {
-      szolgaltatas: szolgaltatas,
-      url: `/szolgaltatasok/${(params as { page: string }).page}`,
+      szolgaltatas: szolgaltatas || null,
+      url: `/szolgaltatasok/${(params as { page: string }).page}` || null,
     },
   };
 };

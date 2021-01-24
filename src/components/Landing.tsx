@@ -1,49 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useWindowSize } from '../hooks/window-size';
 import Navbar from './Navbar';
-
-// Hook
-export function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // only execute all the code below in client side
-    if (typeof window !== 'undefined') {
-      // Handler to call on window resize
-      const handleResize = () => {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      };
-
-      // Add event listener
-      window.addEventListener('resize', handleResize);
-
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-
-      // Remove event listener on cleanup
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
-}
 
 export default function Landing() {
   const size = useWindowSize();
   return (
     <section id='landing'>
-      <div className='navbar'>
-        <Navbar isDarkBackground={false} />
-      </div>
+      {size.width > 1024 && (
+        <div className='navbar'>
+          <Navbar isDarkBackground={false} />
+        </div>
+      )}
       <div className='bg-overlay'></div>
-      {size.width > 766 ? (
+      {size.width > 1024 ? (
         <video className='bg-media' autoPlay muted loop>
           <source
             src='/images/landing-video.mp4?nf_resize=fit&w=300'
@@ -76,7 +45,7 @@ export default function Landing() {
           background-image: url('/images/bg_mobile.jpg');
           background-position: center;
           background-size: cover;
-          width: 100vw;
+          width: 100%;
           height: 100vh;
           filter: blur(5px);
         }

@@ -36,6 +36,18 @@ export default function Navbar({ isDarkBackground = false }: Props) {
           </Link>
         </li>
         <li>
+          <Link href='/arkalkulator'>
+            <a
+              className={[
+                router.pathname.startsWith('/arkalkulator') ? 'active' : null,
+                isDarkBackground ? 'white' : null,
+              ].join(' ')}
+            >
+              Árkalkulátor
+            </a>
+          </Link>
+        </li>
+        <li>
           <Link href='/rolam'>
             <a
               className={[
@@ -87,9 +99,8 @@ export default function Navbar({ isDarkBackground = false }: Props) {
         li {
           margin-right: 20px;
         }
-        .active ul {
-          opacity: 1;
-          transform: translateY(0);
+        .active {
+          opacity: 0.7;
         }
         .white {
           color: rgba(255, 255, 255, 0.9);
