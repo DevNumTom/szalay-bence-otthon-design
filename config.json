@@ -1,19 +1,19 @@
 {
-  "base_url": "https://wutali-nextjs-netlify-blog.netlify.app",
-  "site_title": "Next.js Netlify Blog",
-  "site_description": "Next.js blog template for Netlify",
+  "base_url": "https://homedesignbudapest.hu",
+  "site_title": "Home Design Budapest",
+  "site_description": "Lakberendezés, lakásfelújítás, Airbnb egy helyen",
   "site_keywords": [
     {
-      "keyword": "Next.js"
+      "keyword": "Home"
     },
     {
-      "keyword": "Netlify"
+      "keyword": "Design"
     },
     {
-      "keyword": "React"
+      "keyword": "Budapest"
     }
   ],
   "posts_per_page": 5,
   "twitter_account": "@my-account",
-  "github_account": "wutali"
+  "github_account": "DevNumTom"
 }
