@@ -240,5 +240,5 @@ collections:
         name: 'munkadijSzorzo'
         widget: 'string'
       - label: 'Rólam'
-        name: 'rolam'
+        name: 'body'
         widget: 'markdown'
