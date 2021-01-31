@@ -1,5 +1,6 @@
 import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Title from './Title';
 
@@ -29,7 +30,7 @@ export default function Calculator({ munkadijSzorzo }: Props) {
     { width: null, height: null },
   ]);
   const [isFalakElterok, setIsFalakElterok] = useState(false);
-
+  const router = useRouter();
   const getM2s = (width: number, height: number): string => {
     if (!width || !height) {
       return null;
@@ -129,7 +130,9 @@ export default function Calculator({ munkadijSzorzo }: Props) {
   };
   return (
     <div className='card'>
-      <Title title='Árkalkulátor' />
+      {router.pathname.startsWith('/arkalkulator') && (
+        <Title title='Árkalkulátor' />
+      )}
       <p className='sub-title'>Falak méretének megadása</p>
       <div className='form__group'>
         <div className='row'>

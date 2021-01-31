@@ -1,8 +1,20 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useRef } from 'react';
 import CustomImage from './CustomImage';
 export default function Contact() {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let formData = new FormData();
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: new URLSearchParams(formData).toString(),
+  //   })
+  //     .then(() => console.log('Form successfully submitted'))
+  //     .catch((error) => alert(error));
+  // };
+
   return (
     <section id='kapcsolat'>
       <div className='custom-img'>
@@ -12,17 +24,12 @@ export default function Contact() {
           alt='Kapcsolat'
         />
       </div>
-      <form
-        name='contact'
-        method='POST'
-        data-netlify='true'
-        data-netlify-recaptcha='true'
-      >
+      <form name='contact' method='POST' data-netlify='true'>
+        <input type='hidden' name='form-name' value='contact' />
         <input type='text' name='name' placeholder='Teljes név' />
         <input type='email' name='email' placeholder='E-mail' />
         <input type='text' name='phone' placeholder='Telefon (nem kötelező)' />
         <textarea name='message' placeholder='Üzenet...'></textarea>
-        <div data-netlify-recaptcha='true'></div>
         <button type='submit'>
           <FontAwesomeIcon width={20} cursor={'pointer'} icon={faPaperPlane} />
           <span>Küldés</span>
