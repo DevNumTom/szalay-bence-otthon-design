@@ -44,7 +44,7 @@ export default function PostList({ posts, tags, pagination }: Props) {
         .container {
           display: flex;
           margin: 0 auto;
-          max-width: 1200px;
+          max-width: 80%;
           width: 100%;
           padding: 0 1.5rem;
         }

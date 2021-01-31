@@ -14,7 +14,7 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
   const size = useWindowSize();
   return (
     <>
-      {size.width < 1024 ? (
+      {size.width < 1060 ? (
         <Burger active={active} onClick={() => setActive(!active)} />
       ) : null}
       <div className={'container ' + (active ? 'active' : '')}>
@@ -28,13 +28,13 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
           </a>
         </Link>
         <ul>
-          <li>
+          {/* <li>
             <Link href='/'>
               <a className={router.pathname === '/' ? 'active' : null}>
                 Főoldal
               </a>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href='/munkak'>
               <a
@@ -43,6 +43,30 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
                 }
               >
                 Munkáim
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/szolgaltatasok'>
+              <a
+                className={
+                  router.pathname.startsWith('/szolgaltatasok')
+                    ? 'active'
+                    : null
+                }
+              >
+                Szolgáltatások
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/arkalkulator'>
+              <a
+                className={
+                  router.pathname.startsWith('/arkalkulator') ? 'active' : null
+                }
+              >
+                Árkalkulátor
               </a>
             </Link>
           </li>
@@ -78,6 +102,23 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
                 Kapcsolat
               </a>
             </Link>
+          </li>
+          <li>
+            <a href='https://www.facebook.com/bence.b.szalay'>
+              <img
+                className='social-image'
+                src='/images/facebook.svg'
+                alt='homedesignbudapest_facebook'
+              />
+            </a>
+            <a href='https://www.instagram.com/home.design.budapest/'>
+              <img
+                style={{ marginLeft: 10 }}
+                className='social-image'
+                src='/images/instagram.svg'
+                alt='homedesignbudapest_instagram'
+              />
+            </a>
           </li>
         </ul>
         <style jsx>
@@ -126,7 +167,7 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
             .active {
               color: #222;
             }
-            img {
+            img:not(.social-image) {
               max-width: 250px;
               min-width: 200px;
               width: 15vw;
@@ -137,7 +178,7 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
             }
 
             @media (max-width: 460px) {
-              img {
+              img:not(.social-image) {
                 min-width: 125px;
               }
             }

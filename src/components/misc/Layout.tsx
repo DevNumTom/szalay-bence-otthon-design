@@ -36,12 +36,12 @@ export default function Layout({ children, darkImage = '' }: Props) {
       <nav className={darkImage ? 'dark-nav' : ''}>
         <Navigation isWhiteLogo={!!darkImage} />
       </nav>
-      {size.width > 1024 && (
+      {size.width > 1060 && (
         <div className='navbar'>
           <Navbar isDarkBackground={true} />
         </div>
       )}
-      {scrollPosition > 110 && size.width > 1024 && (
+      {scrollPosition > 110 && size.width > 1060 && (
         <header>
           <div className='navbar-container'>
             <Navbar isDarkBackground={true} />
@@ -72,14 +72,13 @@ export default function Layout({ children, darkImage = '' }: Props) {
             width: 100%;
             background: #000;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             z-index: 11;
             all: 0.5s ease;
           }
           .navbar-container {
             display: flex;
             align-items: center;
-            margin-right: 50px;
           }
           main {
             min-height: calc(100vh - 462px);

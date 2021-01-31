@@ -19,7 +19,15 @@ type Props = {
   munkadijSzorzo: number;
 };
 
+enum Tab {
+  Festes = 'Festes',
+  Tapetazas = 'Tapetazas',
+  PadloBurkolas = 'PadloBurkolas',
+  FurdoszobaBurkolas = 'FurdoszobaBurkolas',
+}
+
 export default function Calculator({ munkadijSzorzo }: Props) {
+  const [tab, setTab] = useState(Tab.Festes);
   const [nyilaszarok, setNyilaszarok] = useState<Nyilaszaro[]>([
     { width: null, height: null, piece: 1 },
   ]);
@@ -30,6 +38,7 @@ export default function Calculator({ munkadijSzorzo }: Props) {
     { width: null, height: null },
   ]);
   const [isFalakElterok, setIsFalakElterok] = useState(false);
+  const [isHidegBurkolat, setIsHidegBurkolat] = useState(false);
   const router = useRouter();
   const getM2s = (width: number, height: number): string => {
     if (!width || !height) {
@@ -42,18 +51,6 @@ export default function Calculator({ munkadijSzorzo }: Props) {
     setNyilaszarok([...nyilaszarok, { width: null, height: null, piece: 1 }]);
   const removeNyilaszaro = (index: number) =>
     setNyilaszarok(nyilaszarok.filter((_, i) => i !== index));
-  const increasePieces = (index: number) =>
-    setNyilaszarok(
-      nyilaszarok.map((el, i) =>
-        i === index ? { ...el, piece: el.piece + 1 } : el
-      )
-    );
-  const decreasePieces = (index: number) =>
-    setNyilaszarok(
-      nyilaszarok.map((el, i) =>
-        i === index ? { ...el, piece: el.piece - 1 } : el
-      )
-    );
   const setFalWidth = (index: number, widthSize: number) => {
     setFalak(
       falak.map((el, i) =>
@@ -66,16 +63,12 @@ export default function Calculator({ munkadijSzorzo }: Props) {
       )
     );
   };
-  const setFalHeight = (index: number, heightSize: number) => {
+  const setFalakHeight = (heightSize: number) => {
     setFalak(
-      falak.map((el, i) =>
-        i === index
-          ? {
-              ...el,
-              height: heightSize,
-            }
-          : el
-      )
+      falak.map((el) => ({
+        ...el,
+        height: heightSize,
+      }))
     );
   };
   const setNyilaszaroWidth = (index: number, widthSize: number) => {
@@ -103,6 +96,9 @@ export default function Calculator({ munkadijSzorzo }: Props) {
     );
   };
   const getOsszesen = (): number => {
+    if (tab === Tab.PadloBurkolas) {
+      return falak[0].width * falak[1].width;
+    }
     const formattedFalak = isFalakElterok
       ? falak
       : [falak[0], falak[1], falak[0], falak[1]];
@@ -117,226 +113,296 @@ export default function Calculator({ munkadijSzorzo }: Props) {
     const amount = falakOsszesen - nyilaszarokOsszesen;
     return amount;
   };
+  const getSzorzo = () => {
+    switch (tab) {
+      case Tab.Festes:
+        return 650;
+      case Tab.Tapetazas:
+        return 2500;
+      case Tab.FurdoszobaBurkolas:
+        return 6500;
+      case Tab.PadloBurkolas:
+        return isHidegBurkolat ? 6500 : 2500;
+    }
+  };
   const getFesteskoltseg = () => {
     return (
-      `${getOsszesen() * munkadijSzorzo}`.replace(
-        /\B(?=(\d{3})+(?!\d))/g,
-        ' '
-      ) + ' Ft'
+      `${getOsszesen() * getSzorzo()}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
+      ' Ft'
     );
   };
   const getOsszM2 = () => {
     return `${getOsszesen()}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' m2';
+  };
+  const clearInputs = (currentClickedTab: Tab) => {
+    if (currentClickedTab === Tab.PadloBurkolas || tab === Tab.PadloBurkolas) {
+      setFalak([
+        { width: null, height: null },
+        { width: null, height: null },
+        { width: null, height: null },
+        { width: null, height: null },
+      ]);
+      setNyilaszarok([{ width: null, height: null, piece: 1 }]);
+    }
   };
   return (
     <div className='card'>
       {router.pathname.startsWith('/arkalkulator') && (
         <Title title='Árkalkulátor' />
       )}
-      <p className='sub-title'>Falak méretének megadása</p>
-      <div className='form__group'>
-        <div className='row'>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='1. Fal szélessége'
-              onChange={(e) => {
-                e.preventDefault();
-                setFalWidth(0, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              1. Fal szélessége (m)
-            </label>
-          </div>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='1. Fal magassága'
-              onChange={(e) => {
-                e.preventDefault();
-                setFalHeight(0, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              1. Fal magassága (m)
-            </label>
-          </div>
-          <p className='m2'>{getM2s(falak[0].width, falak[0].height)}</p>
-        </div>
-        <div className='row'>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='2. Fal szélessége'
-              onChange={(e) => {
-                e.preventDefault();
-                setFalWidth(1, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              2. Fal szélessége (m)
-            </label>
-          </div>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='2. Fal magassága'
-              onChange={(e) => {
-                e.preventDefault();
-                setFalHeight(1, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              2. Fal magassága (m)
-            </label>
-          </div>
-          <p className='m2'>{getM2s(falak[1].width, falak[1].height)}</p>
-        </div>
-        <div className='row'>
-          <div className='box'>
-            <input
-              onChange={() => setIsFalakElterok(!isFalakElterok)}
-              id='cb'
-              type='checkbox'
-            />
-            <span className='check'></span>
-            <label htmlFor='cb' className='cb-label'>
-              Szemközti falak mérete eltérő?
-            </label>
-          </div>
-        </div>
-        {isFalakElterok && (
-          <>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  type='number'
-                  className='form__input'
-                  id='name'
-                  placeholder='3. Fal szélessége'
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setFalWidth(2, +e.target.value);
-                  }}
-                />
-                <label htmlFor='name' className='form__label'>
-                  3. Fal szélessége (m)
-                </label>
-              </div>
-              <div className='input-field'>
-                <input
-                  type='number'
-                  className='form__input'
-                  id='name'
-                  placeholder='3. Fal magassága'
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setFalHeight(2, +e.target.value);
-                  }}
-                />
-                <label htmlFor='name' className='form__label'>
-                  3. Fal magassága (m)
-                </label>
-              </div>
-              <p className='m2'>{getM2s(falak[2].width, falak[2].height)}</p>
-            </div>
-            <div className='row'>
-              <div className='input-field'>
-                <input
-                  type='number'
-                  className='form__input'
-                  id='name'
-                  placeholder='4. Fal szélessége'
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setFalWidth(3, +e.target.value);
-                  }}
-                />
-                <label htmlFor='name' className='form__label'>
-                  4. Fal szélessége (m)
-                </label>
-              </div>
-              <div className='input-field'>
-                <input
-                  type='number'
-                  className='form__input'
-                  id='name'
-                  placeholder='4. Fal magassága'
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setFalHeight(3, +e.target.value);
-                  }}
-                />
-                <label htmlFor='name' className='form__label'>
-                  4. Fal magassága (m)
-                </label>
-              </div>
-              <p className='m2'>{getM2s(falak[3].width, falak[3].height)}</p>
-            </div>
-          </>
-        )}
+      <div className='tabs'>
+        <p
+          onClick={() => {
+            clearInputs(Tab.Festes);
+            setTab(Tab.Festes);
+          }}
+          className={tab === Tab.Festes ? 'active-tab' : null}
+        >
+          Festés
+        </p>
+        <p
+          onClick={() => {
+            clearInputs(Tab.Tapetazas);
+            setTab(Tab.Tapetazas);
+          }}
+          className={tab === Tab.Tapetazas ? 'active-tab' : null}
+        >
+          Tapétázás
+        </p>
+        <p
+          onClick={() => {
+            clearInputs(Tab.FurdoszobaBurkolas);
+            setTab(Tab.FurdoszobaBurkolas);
+          }}
+          className={tab === Tab.FurdoszobaBurkolas ? 'active-tab' : null}
+        >
+          Fürdőszoba burkolás
+        </p>
+        <p
+          onClick={() => {
+            clearInputs(Tab.PadloBurkolas);
+            setTab(Tab.PadloBurkolas);
+          }}
+          className={tab === Tab.PadloBurkolas ? 'active-tab' : null}
+        >
+          Padló burkolás
+        </p>
       </div>
-      <p className='sub-title'>Nyílászárók kivonása</p>
-      {nyilaszarok.map((el, i) => (
-        <div key={i} className='row'>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='Nyílászáró szélessége'
-              onChange={(e) => {
-                e.preventDefault();
-                setNyilaszaroWidth(i, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              Nyílászáró szélessége (m)
-            </label>
+      {tab === Tab.PadloBurkolas && (
+        <>
+          <p className='sub-title'>Méretek megadása</p>
+          <div className='form__group'>
+            <div className='row'>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='Padló szélesség (m)'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setFalWidth(0, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  Padló szélesség (m)
+                </label>
+              </div>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='Padló hossza (m)'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setFalWidth(1, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  Padló hossza (m)
+                </label>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='box'>
+                <input
+                  onChange={() => setIsHidegBurkolat(!isHidegBurkolat)}
+                  id='cb'
+                  type='checkbox'
+                />
+                <span className='check'></span>
+                <label htmlFor='cb' className='cb-label'>
+                  Hideg burkolat?
+                </label>
+              </div>
+            </div>
           </div>
-          <div className='input-field'>
-            <input
-              type='number'
-              className='form__input'
-              id='name'
-              placeholder='Nyílászáró magassága'
-              onChange={(e) => {
-                e.preventDefault();
-                setNyilaszaroHeight(i, +e.target.value);
-              }}
-            />
-            <label htmlFor='name' className='form__label'>
-              Nyílászáró magassága (m)
-            </label>
-          </div>
-          <div className='plus'>
-            <FontAwesomeIcon
-              width={30}
-              cursor={'pointer'}
-              icon={faPlusCircle}
-              onClick={() => addNyilaszaro()}
-            />
-            {nyilaszarok.length > 1 && (
-              <FontAwesomeIcon
-                style={{ marginLeft: 10 }}
-                width={30}
-                cursor={'pointer'}
-                icon={faMinusCircle}
-                onClick={() => removeNyilaszaro(i)}
-              />
+        </>
+      )}
+      {tab !== Tab.PadloBurkolas && (
+        <>
+          <p className='sub-title'>Falak méretének megadása</p>
+          <div className='form__group'>
+            <div className='row'>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder={
+                    tab === Tab.FurdoszobaBurkolas
+                      ? 'Burkolandó felület magassága (m)'
+                      : 'Falak magassága (m)'
+                  }
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setFalakHeight(+e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  {tab === Tab.FurdoszobaBurkolas
+                    ? 'Burkolandó felület magassága (m)'
+                    : 'Falak magassága (m)'}
+                </label>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='1. Fal szélessége'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setFalWidth(0, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  1. Fal szélessége (m)
+                </label>
+              </div>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='2. Fal szélessége'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setFalWidth(1, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  2. Fal szélessége (m)
+                </label>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='box'>
+                <input
+                  onChange={() => setIsFalakElterok(!isFalakElterok)}
+                  id='cb'
+                  type='checkbox'
+                />
+                <span className='check'></span>
+                <label htmlFor='cb' className='cb-label'>
+                  Szemközti falak mérete eltérő?
+                </label>
+              </div>
+            </div>
+            {isFalakElterok && (
+              <>
+                <div className='row'>
+                  <div className='input-field'>
+                    <input
+                      type='number'
+                      className='form__input'
+                      id='name'
+                      placeholder='3. Fal szélessége'
+                      onChange={(e) => {
+                        e.preventDefault();
+                        setFalWidth(2, +e.target.value);
+                      }}
+                    />
+                    <label htmlFor='name' className='form__label'>
+                      3. Fal szélessége (m)
+                    </label>
+                  </div>
+                  <div className='input-field'>
+                    <input
+                      type='number'
+                      className='form__input'
+                      id='name'
+                      placeholder='4. Fal szélessége'
+                      onChange={(e) => {
+                        e.preventDefault();
+                        setFalWidth(3, +e.target.value);
+                      }}
+                    />
+                    <label htmlFor='name' className='form__label'>
+                      4. Fal szélessége (m)
+                    </label>
+                  </div>
+                </div>
+              </>
             )}
           </div>
-        </div>
-      ))}
+          <p className='sub-title'>Nyílászárók kivonása</p>
+          {nyilaszarok.map((el, i) => (
+            <div key={i} className='row'>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='Nyílászáró szélessége'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setNyilaszaroWidth(i, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  Nyílászáró szélessége (m)
+                </label>
+              </div>
+              <div className='input-field'>
+                <input
+                  type='number'
+                  className='form__input'
+                  id='name'
+                  placeholder='Nyílászáró magassága'
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setNyilaszaroHeight(i, +e.target.value);
+                  }}
+                />
+                <label htmlFor='name' className='form__label'>
+                  Nyílászáró magassága (m)
+                </label>
+              </div>
+              <div className='plus'>
+                <FontAwesomeIcon
+                  width={30}
+                  cursor={'pointer'}
+                  icon={faPlusCircle}
+                  onClick={() => addNyilaszaro()}
+                />
+                {nyilaszarok.length > 1 && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 10 }}
+                    width={30}
+                    cursor={'pointer'}
+                    icon={faMinusCircle}
+                    onClick={() => removeNyilaszaro(i)}
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
       <p className='sub-title'>{`Összesen: ${getOsszM2()}`}</p>
       <p className='sub-title'>{`Teljes festés díja: ${getFesteskoltseg()}`}</p>
       <style jsx>{`
@@ -473,6 +539,21 @@ export default function Calculator({ munkadijSzorzo }: Props) {
           transition-delay: 0.2s !important;
           transition: all 0.25s cubic-bezier(0, 1.05, 0.72, 1.07);
         }
+
+        .tabs {
+          display: flex;
+          width: 100%;
+          justify-content: space-around;
+          margin-bottom: 30px;
+        }
+        .tabs p {
+          cursor: pointer;
+          font-style: italic;
+          font-size: 18px;
+        }
+        .active-tab {
+          text-decoration: underline;
+        }
         @media screen and (max-width: 910px) {
           .row {
             flex-direction: column;
@@ -490,6 +571,12 @@ export default function Calculator({ munkadijSzorzo }: Props) {
             margin-top: -30px;
             margin-bottom: 50px;
             text-align: end;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          .tabs {
+            flex-direction: column;
+            align-items: center;
           }
         }
       `}</style>

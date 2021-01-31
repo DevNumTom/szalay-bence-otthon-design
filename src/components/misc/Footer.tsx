@@ -55,6 +55,28 @@ export default function Footer() {
           </Link>
         </li>
         <li>
+          <Link href='/szolgaltatasok'>
+            <a
+              className={
+                router.pathname.startsWith('/szolgaltatasok') ? 'active' : null
+              }
+            >
+              Szolgáltatások
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href='/arkalkulator'>
+            <a
+              className={
+                router.pathname.startsWith('/arkalkulator') ? 'active' : null
+              }
+            >
+              Árkalkulátor
+            </a>
+          </Link>
+        </li>
+        <li>
           <Link href='/rolam'>
             <a
               className={router.pathname.startsWith('/rolam') ? 'active' : null}
@@ -82,6 +104,23 @@ export default function Footer() {
               Kapcsolat
             </a>
           </Link>
+        </li>
+        <li>
+          <a href='https://www.facebook.com/bence.b.szalay'>
+            <img
+              className='social-image'
+              src='/images/facebook.svg'
+              alt='homedesignbudapest_facebook'
+            />
+          </a>
+          <a href='https://www.instagram.com/home.design.budapest/'>
+            <img
+              style={{ marginLeft: 10 }}
+              className='social-image'
+              src='/images/instagram.svg'
+              alt='homedesignbudapest_instagram'
+            />
+          </a>
         </li>
       </ul>
       <style jsx>{`

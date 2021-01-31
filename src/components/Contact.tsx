@@ -3,18 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef } from 'react';
 import CustomImage from './CustomImage';
 export default function Contact() {
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   let formData = new FormData();
-  //   fetch('/', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: new URLSearchParams(formData).toString(),
-  //   })
-  //     .then(() => console.log('Form successfully submitted'))
-  //     .catch((error) => alert(error));
-  // };
-
   return (
     <section id='kapcsolat'>
       <div className='custom-img'>

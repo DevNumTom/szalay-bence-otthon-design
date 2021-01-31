@@ -11,18 +11,13 @@ export default function Navbar({ isDarkBackground = false }: Props) {
   return (
     <div>
       <ul>
-        <li>
-          <Link href='/'>
-            <a
-              className={[
-                router.pathname === '/' ? 'active' : null,
-                isDarkBackground ? 'white' : null,
-              ].join(' ')}
-            >
-              Főoldal
-            </a>
-          </Link>
-        </li>
+        {/* {router.pathname !== '/' && (
+          <li>
+            <Link href='/'>
+              <a className={isDarkBackground ? 'white' : null}>Főoldal</a>
+            </Link>
+          </li>
+        )} */}
         <li>
           <Link href='/munkak'>
             <a
@@ -32,6 +27,18 @@ export default function Navbar({ isDarkBackground = false }: Props) {
               ].join(' ')}
             >
               Munkáim
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href='/szolgaltatasok'>
+            <a
+              className={[
+                router.pathname.startsWith('/szolgaltatasok') ? 'active' : null,
+                isDarkBackground ? 'white' : null,
+              ].join(' ')}
+            >
+              Szolgáltatások
             </a>
           </Link>
         </li>
@@ -83,6 +90,24 @@ export default function Navbar({ isDarkBackground = false }: Props) {
             </a>
           </Link>
         </li>
+        <li>
+          <a href='https://www.facebook.com/bence.b.szalay'>
+            <img
+              className='social-image'
+              src='/images/facebook.svg'
+              alt='homedesignbudapest_facebook'
+            />
+          </a>
+        </li>
+        <li>
+          <a href='https://www.instagram.com/home.design.budapest/'>
+            <img
+              className='social-image'
+              src='/images/instagram.svg'
+              alt='homedesignbudapest_instagram'
+            />
+          </a>
+        </li>
       </ul>
       <style jsx>{`
         ul {
@@ -99,14 +124,14 @@ export default function Navbar({ isDarkBackground = false }: Props) {
         li {
           margin-right: 20px;
         }
-        .active {
-          opacity: 0.7;
-        }
         .white {
           color: rgba(255, 255, 255, 0.9);
         }
         .white:hover {
           color: rgba(255, 255, 255, 0.6);
+        }
+        .active {
+          opacity: 0.7;
         }
       `}</style>
     </div>

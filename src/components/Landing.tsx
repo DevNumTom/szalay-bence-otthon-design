@@ -6,13 +6,13 @@ export default function Landing() {
   const size = useWindowSize();
   return (
     <section id='landing'>
-      {size.width > 1024 && (
+      {size.width > 1060 && (
         <div className='navbar'>
           <Navbar isDarkBackground={false} />
         </div>
       )}
       <div className='bg-overlay'></div>
-      {size.width > 1024 ? (
+      {size.width > 1060 ? (
         <video className='bg-media' autoPlay muted loop>
           <source
             src='/images/landing-video.mp4?nf_resize=fit&w=300'
