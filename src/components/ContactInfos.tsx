@@ -43,6 +43,7 @@ export default function ContactInfos({ adataim }: Props) {
         }
         h2 {
           margin-top: 50px;
+          font-size: 22px;
         }
         .card:hover {
           transform: scale(1.1);

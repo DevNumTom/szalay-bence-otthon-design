@@ -2,6 +2,7 @@ import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { getSzolgaltatas } from '../lib/data/szolgaltatasok';
 import Title from './Title';
 
 interface Nyilaszaro {
@@ -145,6 +146,18 @@ export default function Calculator({ munkadijSzorzo }: Props) {
       setNyilaszarok([{ width: null, height: null, piece: 1 }]);
     }
   };
+  const getSzolgaltatasInString = (): string => {
+    switch (tab) {
+      case Tab.Festes:
+        return 'Festés';
+      case Tab.Tapetazas:
+        return 'Tapétázás';
+      case Tab.FurdoszobaBurkolas:
+        return 'Fürdőszoba burkolás';
+      case Tab.PadloBurkolas:
+        return 'Padlóburkolás';
+    }
+  };
   return (
     <div className='card'>
       {router.pathname.startsWith('/arkalkulator') && (
@@ -230,6 +243,19 @@ export default function Calculator({ munkadijSzorzo }: Props) {
                   onChange={() => setIsHidegBurkolat(!isHidegBurkolat)}
                   id='cb'
                   type='checkbox'
+                  checked={!isHidegBurkolat}
+                />
+                <span className='check'></span>
+                <label htmlFor='cb' className='cb-label'>
+                  Meleg burkolat?
+                </label>
+              </div>
+              <div className='box'>
+                <input
+                  onChange={() => setIsHidegBurkolat(!isHidegBurkolat)}
+                  id='cb'
+                  type='checkbox'
+                  checked={isHidegBurkolat}
                 />
                 <span className='check'></span>
                 <label htmlFor='cb' className='cb-label'>
@@ -349,7 +375,7 @@ export default function Calculator({ munkadijSzorzo }: Props) {
               </>
             )}
           </div>
-          <p className='sub-title'>Nyílászárók kivonása</p>
+          <p className='sub-title'>Nyílászárók kivonása (ajtók, ablakok)</p>
           {nyilaszarok.map((el, i) => (
             <div key={i} className='row'>
               <div className='input-field'>
@@ -404,7 +430,13 @@ export default function Calculator({ munkadijSzorzo }: Props) {
         </>
       )}
       <p className='sub-title'>{`Összesen: ${getOsszM2()}`}</p>
-      <p className='sub-title'>{`Teljes festés díja: ${getFesteskoltseg()}`}</p>
+      <p className='sub-title'>{`${getSzolgaltatasInString()} díja: ${getFesteskoltseg()}`}</p>
+      <p className='note'>
+        **Áraink tájékoztató jellegűek és nem minősülnek ajánlat tételnek. Az
+        árak négyzetméter alapján vannak kalkulálva és többnyire előkészített
+        felületre való munkadíjjal számol. Az árak csak a munkadíjra
+        vonatkoznak, az anyagköltséget nem tartalmazzák.
+      </p>
       <style jsx>{`
         .card {
           width: 70%;
@@ -415,6 +447,11 @@ export default function Calculator({ munkadijSzorzo }: Props) {
           background: #f0f0f0;
           border-radius: 16px;
           padding: 50px;
+        }
+        .note {
+          margin-top: 30px;
+          font-style: italic;
+          font-weight: 500;
         }
         .plus {
           margin-left: 50px;

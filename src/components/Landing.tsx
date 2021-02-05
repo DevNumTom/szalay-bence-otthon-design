@@ -24,8 +24,7 @@ export default function Landing() {
       <div className='bg-image'></div>
       <div className='viewport-header'>
         <h1>
-          Szalay Bence
-          <span>Otthon design</span>
+          <span>Home design</span>
         </h1>
       </div>
       <style jsx>{`
