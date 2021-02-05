@@ -12,16 +12,16 @@ export default function Landing() {
         </div>
       )}
       <div className='bg-overlay'></div>
-      {size.width > 1060 ? (
+      {/* {size.width > 1060 ? (
         <video className='bg-media' autoPlay muted loop>
           <source
             src='/images/landing-video.mp4?nf_resize=fit&w=300'
             type='video/mp4'
           ></source>
         </video>
-      ) : (
-        <div className='bg-image'></div>
-      )}
+      ) : ( */}
+      {/* )} */}
+      <div className='bg-image'></div>
       <div className='viewport-header'>
         <h1>
           Szalay Bence
