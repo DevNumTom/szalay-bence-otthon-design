@@ -22,11 +22,15 @@ export default function Index({ adataim }: Props) {
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
       <div className='card'>
+        <Title title='Rólam' />
         <div className='img-container'>
-          <CustomImage src='images/profilkep_1.jpg' alt='Proifilkép' />
+          <CustomImage
+            radius={25}
+            src='images/profilkep_1.jpg'
+            alt='Proifilkép'
+          />
         </div>
         <div className='rolam-container'>
-          <Title title='Rólam' />
           <p>{adataim ? adataim.rolam : ''}</p>
         </div>
       </div>
@@ -34,13 +38,15 @@ export default function Index({ adataim }: Props) {
       <style jsx>{`
         .card {
           display: flex;
+          flex-direction: column;
+          align-items: center;
           width: 70%;
           box-shadow: -1px 2px 33px 0px rgba(0, 0, 0, 0.51);
           -webkit-box-shadow: -1px 2px 33px 0px rgba(0, 0, 0, 0.51);
           -moz-box-shadow: -1px 2px 33px 0px rgba(0, 0, 0, 0.51);
           background: #f0f0f0;
           border-radius: 16px;
-          margin: -100px auto 100px;
+          margin: -100px auto 150px;
         }
         .img-container {
           padding: 10px;
@@ -52,7 +58,9 @@ export default function Index({ adataim }: Props) {
           padding: 20px;
         }
         p {
-          font-size: 18px;
+          font-size: 20px;
+          text-align: center;
+          line-height: 1.5;
         }
         @media screen and (max-width: 1450px) {
           .card {
