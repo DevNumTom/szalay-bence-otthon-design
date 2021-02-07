@@ -41,7 +41,7 @@ export default function Landing() {
           filter: blur(5px);
         }
         .bg-image {
-          background-image: url('/images/bg_mobile.jpg');
+          background-image: url('/images/bg_mobile.jpg?nf_resize=fit&w=1920');
           background-position: center;
           background-size: cover;
           width: 100%;

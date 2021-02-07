@@ -2,6 +2,22 @@ export type Szolgaltatas = {
     readonly title: string;
     readonly thumbnail: string;
     readonly desc: string;
+    readonly alSzolgaltatasok: AlSzolgaltatas[];
+    readonly slug: string;
+    readonly arlista: ArListItem[];
+};
+
+export type AlSzolgaltatas = {
+    readonly title: string;
+    readonly thumbnail: string;
+    readonly desc: string;
+    readonly slug: string;
+    readonly arlista: ArListItem[];
+};
+
+export type ArListItem = {
+    readonly specSzolg: string;
+    readonly ar: string;
 };
 
 export type Review = {

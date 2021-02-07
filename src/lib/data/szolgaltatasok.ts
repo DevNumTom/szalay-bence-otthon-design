@@ -1,5 +1,5 @@
 import path from "path";
-import { Szolgaltatas } from "../models";
+import { AlSzolgaltatas, Szolgaltatas } from "../models";
 import { fetchContent } from "../general-fetch";
 
 const szolgaltatasokDirectory = path.join(process.cwd(), "src/content/szolgaltatasok");
@@ -14,7 +14,19 @@ export function getSzolgaltatasok(): Szolgaltatas[] {
     return szolgaltatasokCache;
 }
 
-export function getSzolgaltatas(index: number): Szolgaltatas {
+export function getAllSzolgaltatasok(): (Szolgaltatas | AlSzolgaltatas)[] {
     const szolgaltatasok = getSzolgaltatasok();
-    return szolgaltatasok[index - 1];
+    return szolgaltatasok
+        .map((el) => {
+            if (el.alSzolgaltatasok && el.alSzolgaltatasok.length) {
+                return [el, ...el.alSzolgaltatasok];
+            }
+            return el;
+        })
+        .flat();
+}
+
+export function getSzolgaltatas(slug: string): Szolgaltatas | AlSzolgaltatas {
+    const szolgaltatasok = getAllSzolgaltatasok();
+    return szolgaltatasok.find(el => el.slug === slug);
 }

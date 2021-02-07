@@ -15,7 +15,7 @@ export default function Services({ szolgaltatasok }: Props) {
           key={i}
           className='card'
           style={{ backgroundImage: `url(${el.thumbnail})` }}
-          onClick={() => router.push(`/szolgaltatasok/${i + 1}`)}
+          onClick={() => router.push(`/szolgaltatasok/${el.slug}`)}
         >
           <div className='title-container'>
             <h2>{el.title}</h2>
