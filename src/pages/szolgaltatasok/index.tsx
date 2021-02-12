@@ -11,6 +11,7 @@ import Layout from '../../components/misc/Layout';
 import Services from '../../components/Services';
 import Title from '../../components/Title';
 import Works from '../../components/Works';
+import { useWindowSize } from '../../hooks/window-size';
 import {
   getAllSzolgaltatasok,
   getSzolgaltatasok,
@@ -24,6 +25,7 @@ type Props = {
 export default function Szolgaltatasok({ szolgaltatasok }: Props) {
   const url = `/szolgaltatasok`;
   const title = 'Szolgáltatások';
+  const size = useWindowSize();
   return (
     <Layout darkImage='/images/works.jpg'>
       <BasicMeta url={url} title={title} />
@@ -33,9 +35,11 @@ export default function Szolgaltatasok({ szolgaltatasok }: Props) {
         {/* <Services szolgaltatasok={szolgaltatasok} /> */}
         {szolgaltatasok.map((el, i) => (
           <div key={i} className={`row ${i % 2 === 0 ? 'even' : 'odd'}`}>
-            <div className='img-container'>
-              <img src={el.thumbnail} alt={el.title} />
-            </div>
+            {size.width > 700 && (
+              <div className='img-container'>
+                <img src={el.thumbnail} alt={el.title} />
+              </div>
+            )}
             <div className='content'>
               <Title isSmall={true} title={el.title} />
               <p className='description'>{el.desc}</p>

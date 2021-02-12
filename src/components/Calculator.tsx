@@ -2,9 +2,7 @@ import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { getSzolgaltatas } from '../lib/data/szolgaltatasok';
 import Title from './Title';
-
 interface Nyilaszaro {
   width: number;
   height: number;
@@ -432,8 +430,8 @@ export default function Calculator({ munkadijSzorzo }: Props) {
       <p className='sub-title'>{`Összesen: ${getOsszM2()}`}</p>
       <p className='sub-title'>{`${getSzolgaltatasInString()} díja: ${getFesteskoltseg()}`}</p>
       <p className='note'>
-        **Áraink tájékoztató jellegűek és nem minősülnek ajánlat tételnek. Az
-        árak négyzetméter alapján vannak kalkulálva és többnyire előkészített
+        Áraink tájékoztató jellegűek és nem minősülnek ajánlat tételnek. Az árak
+        négyzetméter alapján vannak kalkulálva és többnyire előkészített
         felületre való munkadíjjal számol. Az árak csak a munkadíjra
         vonatkoznak, az anyagköltséget nem tartalmazzák.
       </p>
