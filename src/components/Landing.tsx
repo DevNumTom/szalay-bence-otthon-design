@@ -47,6 +47,15 @@ export default function Landing() {
           width: 100%;
           height: 100vh;
           filter: blur(5px);
+          animation: shrink 7s infinite alternate;
+        }
+        @keyframes shrink {
+          0% {
+            background-size: 110% 110%;
+          }
+          100% {
+            background-size: 100% 100%;
+          }
         }
         .navbar {
           position: absolute;
