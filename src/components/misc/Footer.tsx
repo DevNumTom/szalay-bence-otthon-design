@@ -3,7 +3,6 @@ import React from 'react';
 import CustomImage from '../CustomImage';
 import Copyright from './Copyright';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Footer() {
   const router = useRouter();
@@ -13,30 +12,10 @@ export default function Footer() {
         <CustomImage
           src='/images/logo_white.png'
           alt='Otthon design logó'
-          width={300}
+          width={200}
         />
       </div>
-      <div>
-        <ul>
-          <li>
-            <Link href=''>
-              <a>
-                {/* TODO */}
-                {/* <FontAwesomeIcon icon={'facebook'} color='#fff' /> */}
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href=''>
-              <a>
-                {/* TODO */}
-                {/* <FontAwesomeIcon icon={'instagram'} color='#fff' /> */}
-              </a>
-            </Link>
-          </li>
-        </ul>
-        <Copyright />
-      </div>
+      <Copyright />
       <ul>
         <li>
           <Link href='/'>

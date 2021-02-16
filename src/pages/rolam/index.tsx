@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { GetStaticProps } from 'next';
 import React from 'react';
 import CustomImage from '../../components/CustomImage';
@@ -6,6 +7,7 @@ import OpenGraphMeta from '../../components/meta/OpenGraphMeta';
 import TwitterCardMeta from '../../components/meta/TwitterCardMeta';
 import Layout from '../../components/misc/Layout';
 import Title from '../../components/Title';
+import { useWindowSize } from '../../hooks/window-size';
 import { getAdataim } from '../../lib/data/adataim';
 import { Adataim } from '../../lib/models';
 
@@ -14,6 +16,7 @@ type Props = {
 };
 
 export default function Index({ adataim }: Props) {
+  const size = useWindowSize();
   const url = `/rolam`;
   const title = 'Rólam';
   return (
@@ -21,20 +24,25 @@ export default function Index({ adataim }: Props) {
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
-      <div className='card'>
-        <Title title='Rólam' />
-        <div className='img-container'>
-          <CustomImage
-            radius={25}
-            src='images/profilkep_1.jpg'
-            alt='Proifilkép'
-          />
+      <motion.div
+        initial={{ translateY: 200 }}
+        animate={{ translateY: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <div className='card'>
+          <Title title='Rólam' />
+          <div className='img-container'>
+            <CustomImage
+              radius={25}
+              src='images/profilkep_1.jpg?nf_resize=fit&w=800'
+              alt='Proifilkép'
+            />
+          </div>
+          <div className='rolam-container'>
+            <p>{adataim ? adataim.rolam : ''}</p>
+          </div>
         </div>
-        <div className='rolam-container'>
-          <p>{adataim ? adataim.rolam : ''}</p>
-        </div>
-      </div>
-      <div className='card secondary-card'></div>
+      </motion.div>
       <style jsx>{`
         .card {
           display: flex;

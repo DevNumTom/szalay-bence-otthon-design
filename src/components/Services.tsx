@@ -14,7 +14,9 @@ export default function Services({ szolgaltatasok }: Props) {
         <div
           key={i}
           className='card'
-          style={{ backgroundImage: `url(${el.thumbnail})` }}
+          style={{
+            backgroundImage: `url(${el.thumbnail}?nf_resize=fit&w=300)`,
+          }}
           onClick={() => router.push(`/szolgaltatasok/${el.slug}`)}
         >
           <div className='title-container'>

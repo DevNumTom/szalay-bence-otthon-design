@@ -19,7 +19,7 @@ export default function Works({ munkak }: Props) {
         >
           {munkak.map((el, i) => (
             <div key={el.cover}>
-              <img src={`${el.cover}?nf_resize=fit&w=1920`} alt={el.name} />
+              <img src={`${el.cover}?nf_resize=fit&w=1000`} alt={el.name} />
               <p className='legend legend-font'>
                 <Link href={`/munkak/${el.slug}`}>
                   <a>{`${el.name} - ${el.type}`}</a>

@@ -11,10 +11,6 @@ export default function Reviews({ reviews }: Props) {
       {reviews.map((el, i) => (
         <article key={i}>
           {/* TODO - change image */}
-          <img
-            src='https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/32972104_2147381998610521_9119278762792321024_o.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=YFUphcjt490AX_nFb3n&_nc_ht=scontent-vie1-1.xx&oh=0c19d3c88b7b7056b41d06861a7f7a3f&oe=6004E4AD'
-            alt=''
-          />
           <q className='review'>{el.review}</q>
           <footer>
             <p className='name'> - {el.name}</p>

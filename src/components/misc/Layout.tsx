@@ -92,7 +92,7 @@ export default function Layout({ children, darkImage = '' }: Props) {
                 rgba(0, 0, 0, 0.85),
                 rgba(0, 0, 0, 0.85)
               ),
-              url('${darkImage}?nf_resize=smartcrop&w=1920&h=400');
+              url('${darkImage}?nf_resize=smartcrop&w=1024&h=400');
             background-size: cover;
             background-position: center;
           }

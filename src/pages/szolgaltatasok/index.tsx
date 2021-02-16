@@ -1,21 +1,16 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React from 'react';
-import CustomImage from '../../components/CustomImage';
 import BasicMeta from '../../components/meta/BasicMeta';
 import OpenGraphMeta from '../../components/meta/OpenGraphMeta';
 import TwitterCardMeta from '../../components/meta/TwitterCardMeta';
 import Layout from '../../components/misc/Layout';
-import Services from '../../components/Services';
 import Title from '../../components/Title';
-import Works from '../../components/Works';
 import { useWindowSize } from '../../hooks/window-size';
-import {
-  getAllSzolgaltatasok,
-  getSzolgaltatasok,
-} from '../../lib/data/szolgaltatasok';
+import { getAllSzolgaltatasok } from '../../lib/data/szolgaltatasok';
 import { AlSzolgaltatas, Szolgaltatas } from '../../lib/models';
 
 type Props = {
@@ -32,25 +27,34 @@ export default function Szolgaltatasok({ szolgaltatasok }: Props) {
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
       <div className='szolgaltatasok-container'>
-        {/* <Services szolgaltatasok={szolgaltatasok} /> */}
         {szolgaltatasok.map((el, i) => (
-          <div key={i} className={`row ${i % 2 === 0 ? 'even' : 'odd'}`}>
-            {size.width > 700 && (
-              <div className='img-container'>
-                <img src={el.thumbnail} alt={el.title} />
+          <motion.div
+            initial={{ translateX: i % 2 === 0 ? -200 : 200 }}
+            animate={{ translateX: 0 }}
+            transition={{ duration: 1 }}
+            key={i}
+          >
+            <div className={`row ${i % 2 === 0 ? 'even' : 'odd'}`}>
+              {size.width > 700 && (
+                <div className='img-container'>
+                  <img
+                    src={el.thumbnail + '?nf_resize=fit&w=300'}
+                    alt={el.title}
+                  />
+                </div>
+              )}
+              <div className='content'>
+                <Title isSmall={true} title={el.title} />
+                <p className='description'>{el.desc}</p>
+                <Link href={`/szolgaltatasok/${el.slug}`}>
+                  <a>
+                    Bővebben
+                    <FontAwesomeIcon width={10} icon={faArrowRight} />
+                  </a>
+                </Link>
               </div>
-            )}
-            <div className='content'>
-              <Title isSmall={true} title={el.title} />
-              <p className='description'>{el.desc}</p>
-              <Link href={`/szolgaltatasok/${el.slug}`}>
-                <a>
-                  Bővebben
-                  <FontAwesomeIcon width={10} icon={faArrowRight} />
-                </a>
-              </Link>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
       <style jsx>{`

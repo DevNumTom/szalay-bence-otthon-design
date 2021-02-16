@@ -22,7 +22,11 @@ export default function Navigation({ isWhiteLogo = false }: Props) {
           <a>
             <img
               className={'logo'}
-              src={isWhiteLogo ? '/images/logo_white.png' : '/images/logo.png'}
+              src={
+                isWhiteLogo
+                  ? '/images/logo_white.png?nf_resize=fit&w=200'
+                  : '/images/logo.png?nf_resize=fit&w=200'
+              }
               alt='Otthon Design Logo'
             />
           </a>

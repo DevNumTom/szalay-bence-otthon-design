@@ -6,49 +6,47 @@ import React from 'react';
 import Landing from '../components/Landing';
 import Title from '../components/Title';
 import Services from '../components/Services';
-import Reviews from '../components/Reviews';
 import Works from '../components/Works';
 import Contact from '../components/Contact';
-import { Szolgaltatas, Review, Munka, Adataim } from '../lib/models';
+import { Szolgaltatas, Munka, Adataim } from '../lib/models';
 import { GetStaticProps } from 'next';
 import { getSzolgaltatasok } from '../lib/data/szolgaltatasok';
-import { getReviews } from '../lib/data/reviews';
 import { getMunkak } from '../lib/data/munkak';
 import { getAdataim } from '../lib/data/adataim';
 import ContactInfos from '../components/ContactInfos';
 import Calculator from '../components/Calculator';
+import LazyAnimation from '../components/misc/LazyAnimation';
 
 type Props = {
   szolgaltatasok: Szolgaltatas[];
-  reviews: Review[];
   munkak: Munka[];
   adataim: Adataim;
 };
 
-export default function Index({
-  szolgaltatasok,
-  reviews,
-  munkak,
-  adataim,
-}: Props) {
+export default function Index({ szolgaltatasok, munkak, adataim }: Props) {
   return (
     <Layout>
       <BasicMeta url={'/'} />
       <OpenGraphMeta url={'/'} />
       <TwitterCardMeta url={'/'} />
       <Landing />
-      <Title title='Szolgáltatások' />
-      <Services szolgaltatasok={szolgaltatasok} />
-      {/* <Reviews reviews={reviews} /> */}
-      <Title title='Munkáim' />
-      <Works munkak={munkak} />
+      <LazyAnimation cssProp={'translateY'} initial={100} final={0}>
+        <Title title='Szolgáltatások' />
+        <Services szolgaltatasok={szolgaltatasok} />
+      </LazyAnimation>
+      <LazyAnimation cssProp={'opacity'} initial={0} final={1}>
+        <Title title='Munkáim' />
+        <Works munkak={munkak} />
+      </LazyAnimation>
       <Title title='Kapcsolat' />
       <p className='short-desc'>{adataim.shortDesc}</p>
       <Contact />
       <Title title='Elérhetőségek' />
       <ContactInfos adataim={adataim} />
-      <Title title='Árkalkulátor' />
-      <Calculator munkadijSzorzo={+adataim.munkadijSzorzo} />
+      <LazyAnimation cssProp={'translateY'} initial={200} final={0}>
+        <Title title='Árkalkulátor' />
+        <Calculator munkadijSzorzo={+adataim.munkadijSzorzo} />
+      </LazyAnimation>
       <style jsx>{`
         .short-desc {
           max-width: 750px;
@@ -65,13 +63,11 @@ export default function Index({
 
 export const getStaticProps: GetStaticProps = async () => {
   const szolgaltatasok = getSzolgaltatasok();
-  const reviews = getReviews();
   const munkak = getMunkak();
   const adataim = getAdataim();
   return {
     props: {
       szolgaltatasok: szolgaltatasok,
-      reviews: reviews,
       munkak: munkak,
       adataim: adataim,
     },

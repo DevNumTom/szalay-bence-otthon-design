@@ -1,16 +1,19 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef } from 'react';
+import React from 'react';
 import CustomImage from './CustomImage';
+import LazyAnimation from './misc/LazyAnimation';
 export default function Contact() {
   return (
     <section id='kapcsolat'>
       <div className='custom-img'>
-        <CustomImage
-          radius={50}
-          src='/images/profilkep_2.jpg'
-          alt='Kapcsolat'
-        />
+        <LazyAnimation cssProp={'translateX'} initial={-100} final={0}>
+          <CustomImage
+            radius={50}
+            src='/images/profilkep_2.jpg'
+            alt='Kapcsolat'
+          />
+        </LazyAnimation>
       </div>
       <form name='contact' method='POST' data-netlify='true'>
         <input type='hidden' name='form-name' value='contact' />

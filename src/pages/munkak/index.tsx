@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { GetStaticProps } from 'next';
 import React from 'react';
 import BasicMeta from '../../components/meta/BasicMeta';
@@ -20,9 +21,16 @@ export default function Munkak({ munkak }: Props) {
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
-      <div className='munkak-container'>
-        <Works munkak={munkak} />
-      </div>
+      <motion.div
+        initial={{ translateY: 200 }}
+        animate={{ translateY: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <div className='munkak-container'>
+          <Works munkak={munkak} />
+        </div>
+      </motion.div>
+
       <style jsx>{`
         .munkak-container {
           margin: -100px 0 100px 0;
