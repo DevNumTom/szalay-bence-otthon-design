@@ -41,21 +41,12 @@ export default function Landing() {
           filter: blur(5px);
         }
         .bg-image {
-          background-image: url('/images/bg_mobile.jpg?nf_resize=fit&w=1000');
+          background-image: url('/images/bg_mobile.jpg?nf_resize=fit&w=1920');
           background-position: center;
           background-size: cover;
           width: 100%;
           height: 100vh;
           filter: blur(5px);
-          animation: shrink 7s infinite alternate;
-        }
-        @keyframes shrink {
-          0% {
-            background-size: 110% 110%;
-          }
-          100% {
-            background-size: 100% 100%;
-          }
         }
         .navbar {
           position: absolute;
@@ -100,9 +91,14 @@ export default function Landing() {
           background: linear-gradient(180deg, white 0%, transparent 50%);
           opacity: 0.8;
         }
-        @media screen and (min-width: 776) {
-          video {
-            display: block;
+        @media screen and (max-width: 776) {
+          .bg-image {
+            background-image: url('/images/bg_mobile.jpg?nf_resize=fit&w=776');
+          }
+        }
+        @media screen and (max-width: 1300) {
+          .bg-image {
+            background-image: url('/images/bg_mobile.jpg?nf_resize=fit&w=1300');
           }
         }
         @media screen and (min-width: 1200px) {
